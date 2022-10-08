@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/white"
+    android:background="@android:color/holo_red_light"
     android:padding="10dp">
 
     <LinearLayout
@@ -15,12 +15,11 @@
         android:padding="10dp"
         android:background="@android:color/holo_green_light">
 
-        <ImageView
-            android:id="@+id/picture"
+        <TextView
+            android:id="@+id/document"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
-            android:scaleType="center"
             android:src="@mipmap/placeholder"
             android:padding="10dp"
             android:background="@android:color/holo_purple"/>
@@ -42,39 +41,13 @@
             android:textSize="16sp"
             android:background="@color/purple_700"/>
 
-        <LinearLayout
-            android:id="@+id/starter_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@android:color/darker_gray"
-            android:padding="10dp"
-            android:layout_gravity="center">
             <TextView
-                android:id="@+id/starter_1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:id="@+id/starter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/view_image_1"
+                android:text="@string/view_document"
                 style="@style/StarterButton"/>
 
-            <TextView
-                android:id="@+id/starter_2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/view_image_2"
-                style="@style/StarterButton"/>
-
-            <TextView
-                android:id="@+id/starter_3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/view_image_3"
-                style="@style/StarterButton"/>
-
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

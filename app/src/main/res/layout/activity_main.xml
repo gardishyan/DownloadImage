@@ -2,13 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@android:color/holo_blue_light"
     android:padding="10dp">
 
     <fragment
+        android:id="@+id/text_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        class="club.aborigen.downpic.TextFragment"/>
+
+    <fragment
         android:id="@+id/images_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="club.aborigen.downpic.ImagesFragment"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        class="club.aborigen.downpic.ImagesFragment" />
 </LinearLayout>
