@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@android:color/holo_blue_light"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/centered_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="@android:color/holo_green_light">
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleType="center"
+            android:src="@mipmap/placeholder"
+            android:padding="10dp"
+            android:background="@android:color/holo_purple"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:background="@color/purple_700"/>
+
+        <LinearLayout
+            android:id="@+id/starter_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/starter_1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/view_image_1"
+                style="@style/StarterButton"/>
+
+            <TextView
+                android:id="@+id/starter_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/view_image_2"
+                style="@style/StarterButton"/>
+
+            <TextView
+                android:id="@+id/starter_3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/view_image_3"
+                style="@style/StarterButton"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
