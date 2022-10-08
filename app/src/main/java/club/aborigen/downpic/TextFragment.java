@@ -10,9 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
-public class TextFragment extends Fragment implements TextDownloader.TextDownloaderFeedback {
-    private TextDownloader downloader;
+import java.util.UUID;
+
+public class TextFragment extends Fragment {
     private TextView documentView;
     private TextView infoView;
     private ProgressBar progressView;
@@ -39,32 +44,29 @@ public class TextFragment extends Fragment implements TextDownloader.TextDownloa
         starter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloader = new TextDownloader(getString(R.string.text_link), TextFragment.this);
-                downloader.start();
+                UUID wid = TextDownloader.start(getActivity(), getString(R.string.text_link));
+                WorkManager.getInstance(getActivity()).getWorkInfoByIdLiveData(wid)
+                        .observe(getActivity(), new Observer<WorkInfo>() {
+                            @Override
+                            public void onChanged(WorkInfo workInfo) {
+                                switch (workInfo.getState()) {
+                                    case RUNNING:
+                                        Data pd = workInfo.getProgress();
+                                        progressView.setProgress(pd.getInt("progress", 0));
+                                        break;
+                                    case SUCCEEDED:
+                                        Data od = workInfo.getOutputData();
+                                        documentView.setText(od.getString("text"));
+                                        infoView.setText(getString(R.string.download_size,
+                                                od.getInt("length", 0), od.getLong("elapsed", 0)));
+
+                                        break;
+                                }
+                            }
+                        });
             }
         });
 
         return root;
-    }
-
-    @Override
-    public void onTextProgress(int progress) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressView.setProgress(progress);
-            }
-        });
-    }
-
-    @Override
-    public void onTextDownloaded(String str, int size, long elapsed) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                documentView.setText(str);
-                infoView.setText(getString(R.string.download_size, size, elapsed));
-            }
-        });
     }
 }
