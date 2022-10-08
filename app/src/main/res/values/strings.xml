@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lesson5</string>
+    <string name="view_image_1">View Image 1</string>
+    <string name="view_image_2">View Image 2</string>
+    <string name="view_image_3">View Image 3</string>
+    <string name="image_link_1">https://jpeg.org/images/jpeg-home.jpg</string>
+    <string name="image_link_2">https://jpeg.org/images/aic-home.jpg</string>
+    <string name="image_link_3">https://lafoy.ru/photo_l/luchshie-sorta-tomatov-cherri-nazvaniya-foto-1395-56279.jpg</string>
+</resources>
