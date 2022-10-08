@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
 
     private Downloader downloader;
     private ImageView pictureView;
+    private TextView infoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
         setContentView(R.layout.activity_main);
 
         pictureView = findViewById(R.id.picture);
+        infoView = findViewById(R.id.info);
+
         TextView starter1 = findViewById(R.id.starter_1);
         starter1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +50,12 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
     }
 
     @Override
-    public void onBitmapDownloaded(Bitmap bmp) {
+    public void onBitmapDownloaded(Bitmap bmp, int size, long elapsed) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 pictureView.setImageBitmap(bmp);
+                infoView.setText(getString(R.string.download_size, size, elapsed));
             }
         });
     }

@@ -25,6 +25,16 @@
             android:padding="10dp"
             android:background="@android:color/holo_purple"/>
 
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:background="@color/purple_700"/>
+
         <LinearLayout
             android:id="@+id/starter_buttons"
             android:layout_width="match_parent"

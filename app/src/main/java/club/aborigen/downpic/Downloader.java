@@ -25,6 +25,7 @@ public class Downloader extends Thread {
         Log.i(TAG, "Downloader thread started: " + address);
 
         try {
+            long ms1 = System.currentTimeMillis();
             URL url = new URL(address);
             URLConnection connection = url.openConnection();
             Log.i(TAG, "Trying to connect: " + address);
@@ -38,13 +39,13 @@ public class Downloader extends Thread {
             Bitmap bmp = BitmapFactory.decodeStream(input);
             Log.i(TAG, "Download finished");
 
-            listener.onBitmapDownloaded(bmp);
+            listener.onBitmapDownloaded(bmp, contentLength, System.currentTimeMillis() - ms1);
         } catch (Exception e) {
             Log.e(TAG, "Downloader error: " + e);
         }
     }
 
     interface DownloaderFeedback {
-        void onBitmapDownloaded(Bitmap bmp);
+        void onBitmapDownloaded(Bitmap bmp, int size, long elapsed);
     }
 }
