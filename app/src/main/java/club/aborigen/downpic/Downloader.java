@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -36,8 +39,19 @@ public class Downloader extends Thread {
 
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-            Bitmap bmp = BitmapFactory.decodeStream(input);
-            Log.i(TAG, "Download finished");
+            ByteArrayOutputStream output = new ByteArrayOutputStream(contentLength);
+
+            byte[] chunk = new byte[1024];
+            int count = input.read(chunk);
+            while (count > 0) {
+                output.write(chunk, 0, count);
+                count = input.read(chunk);
+                listener.onBitmapProgress((output.size() * 100) / contentLength);
+                Thread.sleep(100); 
+            }
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(output.toByteArray(), 0, output.size());
+            Log.i(TAG, "Download finished: " + output.size());
 
             listener.onBitmapDownloaded(bmp, contentLength, System.currentTimeMillis() - ms1);
         } catch (Exception e) {
@@ -46,6 +60,7 @@ public class Downloader extends Thread {
     }
 
     interface DownloaderFeedback {
+        void onBitmapProgress(int progress);
         void onBitmapDownloaded(Bitmap bmp, int size, long elapsed);
     }
 }

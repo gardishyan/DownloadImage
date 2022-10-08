@@ -25,6 +25,13 @@
             android:padding="10dp"
             android:background="@android:color/holo_purple"/>
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
         <TextView
             android:id="@+id/info"
             android:layout_width="match_parent"

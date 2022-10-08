@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements Downloader.DownloaderFeedback {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
     private Downloader downloader;
     private ImageView pictureView;
     private TextView infoView;
+    private ProgressBar progressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
 
         pictureView = findViewById(R.id.picture);
         infoView = findViewById(R.id.info);
+        progressView = findViewById(R.id.progress);
 
         TextView starter1 = findViewById(R.id.starter_1);
         starter1.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +48,16 @@ public class MainActivity extends AppCompatActivity implements Downloader.Downlo
             public void onClick(View view) {
                 downloader = new Downloader(getString(R.string.image_link_3),MainActivity.this);
                 downloader.start();
+            }
+        });
+    }
+
+    @Override
+    public void onBitmapProgress(int progress) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressView.setProgress(progress);
             }
         });
     }
